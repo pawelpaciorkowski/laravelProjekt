@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\Category;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -120,5 +121,27 @@ class CourseController extends Controller
         $course->delete();
 
         return redirect()->route('courses.index')->with('success', 'Kurs usunięty pomyślnie.');
+    }
+    /**
+     * Zapisuje zalogowanego użytkownika na kurs.
+     */
+    public function enroll(Course $course)
+    {
+        // Używamy metody attach, aby dodać wpis do tabeli pośredniej
+        // unikając duplikatów.
+        $course->participants()->syncWithoutDetaching([Auth::id()]);
+
+        return back()->with('success', 'Zostałeś pomyślnie zapisany na kurs.');
+    }
+
+    /**
+     * Wypisuje zalogowanego użytkownika z kursu.
+     */
+    public function unenroll(Course $course)
+    {
+        // Używamy metody detach, aby usunąć wpis z tabeli pośredniej.
+        $course->participants()->detach(Auth::id());
+
+        return back()->with('success', 'Zostałeś wypisany z kursu.');
     }
 }
