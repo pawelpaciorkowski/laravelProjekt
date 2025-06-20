@@ -11,13 +11,6 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-
-    public function index()
-    {
-        $users = \App\Models\User::all();
-
-        return view('profile.partials.index', compact('users'));
-    }
     /**
      * Display the user's profile form.
      */
@@ -33,26 +26,16 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $user = $request->user();
+        $request->user()->fill($request->validated());
 
-        $data = $request->validated();
-
-        // Tylko administrator może zmieniać role
-        if (!auth()->user()->is_admin) {
-            unset($data['role']); // usuń z walidacji jeśli nie admin
+        if ($request->user()->isDirty('email')) {
+            $request->user()->email_verified_at = null;
         }
 
-        $user->fill($data);
-
-        if ($user->isDirty('email')) {
-            $user->email_verified_at = null;
-        }
-
-        $user->save();
+        $request->user()->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
-
 
     /**
      * Delete the user's account.

@@ -4,18 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        $users = User::all();
+        $users = User::latest()->paginate(15);
+
+        // Zwracamy poprawny widok: 'users.index'
         return view('users.index', compact('users'));
     }
-
     /**
      * Show the form for creating a new resource.
      */
