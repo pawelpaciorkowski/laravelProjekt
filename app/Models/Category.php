@@ -14,5 +14,5 @@ class Category extends Model
      *
      * @var array
      */
-    protected $fillable = ['name']; // <-- DODAJ TĘ LINIĘ
+    protected $fillable = ['name'];
 }
