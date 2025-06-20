@@ -10,6 +10,11 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <a href="{{ route('categories.create') }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700">Dodaj kategorię</a>
+
+                    <form action="{{ route('categories.index') }}" method="GET" class="mt-4">
+                        <input type="text" name="search" placeholder="Szukaj..." value="{{ request('search') }}" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700">Szukaj</button>
+                    </form>
                     <table class="min-w-full divide-y divide-gray-200 mt-6">
                         <thead class="bg-gray-50">
                             <tr>

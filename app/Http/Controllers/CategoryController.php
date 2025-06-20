@@ -3,17 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use Illuminate\Http\Request; // Upewnij się, że to jest zaimportowane
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request) // Dodaj Request $request jako argument
     {
-        // Pobieramy wszystkie kategorie z bazy i przekazujemy do widoku
-        $categories = Category::paginate(10); // paginate dzieli wyniki na strony
+        $search = $request->query('search');
+
+        $query = Category::query();
+
+        if ($search) {
+            $query->where('name', 'like', '%' . $search . '%');
+        }
+
+        $categories = $query->paginate(10);
+
         return view('categories.index', ['categories' => $categories]);
     }
 
