@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             {{-- Karty ze statystykami --}}
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
                 {{-- Karta Użytkownicy --}}
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
@@ -17,27 +17,27 @@
                         <p class="text-3xl font-bold mt-2">{{ $userCount }}</p>
                     </div>
                 </div>
-                {{-- Karta Kursy --}}
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                {{-- Kursy --}}
+                <a href="{{ route('courses.index') }}" class="block bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg hover:shadow-lg transition-shadow duration-200">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
                         <h3 class="text-lg font-semibold">Kursy</h3>
                         <p class="text-3xl font-bold mt-2">{{ $courseCount }}</p>
                     </div>
-                </div>
-                {{-- Karta Kategorie --}}
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                </a>
+                {{-- Kategorie --}}
+                <a href="{{ route('categories.index') }}" class="block bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg hover:shadow-lg transition-shadow duration-200">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
                         <h3 class="text-lg font-semibold">Kategorie</h3>
                         <p class="text-3xl font-bold mt-2">{{ $categoryCount }}</p>
                     </div>
-                </div>
-                {{-- Karta Tagi --}}
+                </a>
+                <!-- {{-- Karta Tagi --}}
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
                         <h3 class="text-lg font-semibold">Tagi</h3>
                         <p class="text-3xl font-bold mt-2">{{ $tagCount }}</p>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             {{-- Lista ostatnich kursów --}}

@@ -40,20 +40,28 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        <!-- Link do profilu -->
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profil') }}
                         </x-dropdown-link>
 
+                        <!-- Link do listy użytkowników -->
+                        <x-dropdown-link :href="route('users.index')">
+                            {{ __('Lista użytkowników') }}
+                        </x-dropdown-link>
+
+                        <!-- Wylogowanie -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
                             <x-dropdown-link :href="route('logout')"
                                 onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                this.closest('form').submit();">
                                 {{ __('Wyloguj') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
+
                 </x-dropdown>
             </div>
 

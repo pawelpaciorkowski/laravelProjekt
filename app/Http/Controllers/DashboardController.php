@@ -24,8 +24,11 @@ class DashboardController extends Controller
 
         $recentCourses = Course::with('category')->latest()->take(5)->get();
 
-        // POBIERAMY KURSY ZALOGOWANEGO UŻYTKOWNIKA
-        $myCourses = Auth::user()->enrollments()->with('category')->latest()->get();
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        $myCourses = $user->enrollments()->with('category')->latest()->get();
+
 
         return view('dashboard', compact(
             'userCount',
