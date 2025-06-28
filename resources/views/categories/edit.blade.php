@@ -7,17 +7,15 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
                     <form action="{{ route('categories.update', $category) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div>
-                            <label for="name" class="block font-medium text-sm text-gray-700">Nazwa</label>
-                            <input type="text" name="name" id="name" value="{{ old('name', $category->name) }}" class="block mt-1 w-full rounded-md shadow-sm border-gray-300" required>
-                            @error('name')
-                            <p class="text-sm text-red-600 mt-2">{{ $message }}</p>
-                            @enderror
+                            <x-input-label for="name" :value="__('Nazwa')" /> {{-- Zmieniono <label> na x-input-label --}}
+                            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name', $category->name)" required autofocus /> {{-- Zmieniono <input> na x-text-input --}}
+                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
                         <div class="mt-4">
                             <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700">
