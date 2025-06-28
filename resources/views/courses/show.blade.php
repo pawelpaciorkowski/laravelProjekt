@@ -53,6 +53,13 @@
                             @endforelse
                         </ul>
                     </div>
+                    {{-- === POCZĄTEK SEKCJI PAGINACJI === --}}
+                    @if ($tags->hasPages())
+                    <div class="mt-4 p-2">
+                        {{ $tags->links() }}
+                    </div>
+                    @endif
+                    {{-- === KONIEC SEKCJI PAGINACJI === --}}
 
                 </div>
             </div>

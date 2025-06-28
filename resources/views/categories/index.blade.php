@@ -65,6 +65,13 @@
                             </tbody>
                         </table>
                     </div>
+                    {{-- === POCZĄTEK SEKCJI PAGINACJI === --}}
+                    @if ($categories->hasPages())
+                    <div class="mt-4 p-2">
+                        {{ $categories->links() }}
+                    </div>
+                    @endif
+                    {{-- === KONIEC SEKCJI PAGINACJI === --}}
                 </div>
             </div>
         </div>
