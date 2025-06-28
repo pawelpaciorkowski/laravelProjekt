@@ -29,6 +29,13 @@
                             <x-input-error :messages="$errors->get('description')" class="mt-2" />
                         </div>
 
+                        {{-- Pole Link do Wideo --}}
+                        <div class="mt-4">
+                            <x-input-label for="video_url" :value="__('Link do wideo (np. YouTube)')" />
+                            <x-text-input id="video_url" class="block mt-1 w-full" type="text" name="video_url" :value="old('video_url')" placeholder="https://www.youtube.com/watch?v=..." />
+                            <x-input-error :messages="$errors->get('video_url')" class="mt-2" />
+                        </div>
+
                         {{-- Pole Data rozpoczęcia --}}
                         <div class="mt-4">
                             <x-input-label for="start_date" :value="__('Data rozpoczęcia')" />

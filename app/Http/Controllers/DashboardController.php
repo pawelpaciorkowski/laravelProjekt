@@ -12,31 +12,44 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    /**
-     * Display the application dashboard.
-     */
     public function index(): View
     {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        // Dane wspólne lub dla admina/moderatora
         $userCount = User::count();
         $courseCount = Course::count();
         $categoryCount = Category::count();
         $tagCount = Tag::count();
-
-        $recentCourses = Course::with('category')->latest()->take(5)->get();
-
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-
         $myCourses = $user->enrollments()->with('category')->latest()->get();
 
+        // Dane specyficzne dla roli 'user'
+        $discoverCourses = collect();
+        if ($user->role === 'user') {
+            // Pobierz ID kursów, na które użytkownik jest już zapisany
+            $enrolledCourseIds = $myCourses->pluck('id');
+
+            // Pobierz 3 najnowsze kursy, na które użytkownik NIE jest zapisany
+            $discoverCourses = Course::whereNotIn('id', $enrolledCourseIds)
+                ->with('category')
+                ->latest()
+                ->take(3)
+                ->get();
+        }
+
+        // Zawsze pobieramy ostatnio dodane kursy dla panelu admina/moderatora
+        $recentCourses = Course::with('category')->latest()->take(5)->get();
 
         return view('dashboard', compact(
+            'user',
             'userCount',
             'courseCount',
             'categoryCount',
             'tagCount',
             'recentCourses',
-            'myCourses'
+            'myCourses',
+            'discoverCourses'
         ));
     }
 }

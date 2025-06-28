@@ -10,7 +10,6 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
-                    {{-- Zwróć uwagę na action i metodę PUT --}}
                     <form action="{{ route('courses.update', $course) }}" method="POST">
                         @csrf
                         @method('PUT')
@@ -25,6 +24,13 @@
                         <div class="mt-4">
                             <label for="description" class="block font-medium text-sm text-gray-700 dark:text-gray-300">Opis</label>
                             <textarea name="description" id="description" rows="4" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 dark:bg-gray-700" required>{{ old('description', $course->description) }}</textarea>
+                        </div>
+
+                        {{-- Pole Link do Wideo --}}
+                        <div class="mt-4">
+                            <x-input-label for="video_url" :value="__('Link do wideo (np. YouTube)')" />
+                            <x-text-input id="video_url" class="block mt-1 w-full" type="text" name="video_url" :value="old('video_url', $course->video_url)" placeholder="https://www.youtube.com/watch?v=..." />
+                            <x-input-error :messages="$errors->get('video_url')" class="mt-2" />
                         </div>
 
                         {{-- Pole Data rozpoczęcia --}}

@@ -54,6 +54,7 @@ class CourseController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|min:5|max:255',
             'description' => 'required|string|min:20',
+            'video_url' => 'nullable|url|max:255',
             'start_date' => 'required|date|after_or_equal:' . $todayDate,
             'category_id' => 'required|integer|exists:categories,id',
             'tags' => 'nullable|array',
@@ -98,6 +99,7 @@ class CourseController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|min:5|max:255',
             'description' => 'required|string|min:20',
+            'video_url' => 'nullable|url|max:255',
             'start_date' => 'required|date',
             'category_id' => 'required|integer|exists:categories,id',
             'tags' => 'nullable|array',
@@ -129,9 +131,10 @@ class CourseController extends Controller
     {
         // Używamy metody attach, aby dodać wpis do tabeli pośredniej
         // unikając duplikatów.
-        $course->participants()->syncWithoutDetaching([Auth::id()]);
+        $course->participants()->syncWithoutDetaching(Auth::id());
 
-        return back()->with('success', 'Zostałeś pomyślnie zapisany na kurs.');
+        // Używamy dedykowanej sesji flash, aby wywołać fajerwerki
+        return back()->with('enrollment_success', 'Gratulacje! Jesteś teraz uczestnikiem tego kursu. Czas rozpocząć naukę!');
     }
 
     /**
