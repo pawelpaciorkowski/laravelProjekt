@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function () {
     // Trasy zasobów dla poszczególnych modułów
     Route::resource('categories', CategoryController::class);
     Route::resource('courses', CourseController::class);
-    Route::resource('users', UserController::class)->only(['index', 'show']);
+    Route::resource('users', UserController::class)->except(['show']);
     Route::resource('tags', TagController::class); // Dodaj tę linię!
 
     // Trasy zapisu/wypisu na kurs

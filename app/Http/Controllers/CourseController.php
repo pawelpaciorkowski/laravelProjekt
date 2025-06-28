@@ -47,19 +47,21 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        // Walidacja - tu spełniasz wymóg o min. 5 regułach!
+        // Pobieramy dzisiejszą datę w formacie YYYY-MM-DD
+        $todayDate = date('Y-m-d');
+
+        // UDOSKONALONA WALIDACJA Z DYNAMICZNĄ DATĄ
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'start_date' => 'required|date',
+            'title' => 'required|string|min:5|max:255',
+            'description' => 'required|string|min:20',
+            'start_date' => 'required|date|after_or_equal:' . $todayDate,
             'category_id' => 'required|integer|exists:categories,id',
             'tags' => 'nullable|array',
-            'tags.*' => 'integer|exists:tags,id', // Walidacja każdego ID w tablicy
+            'tags.*' => 'integer|exists:tags,id',
         ]);
 
         $course = Course::create($validated);
 
-        // Przypisanie tagów do kursu (relacja many-to-many)
         if ($request->has('tags')) {
             $course->tags()->attach($request->tags);
         }
@@ -92,9 +94,10 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
+        // UDOSKONALONA WALIDACJA PRZY AKTUALIZACJI
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
+            'title' => 'required|string|min:5|max:255',
+            'description' => 'required|string|min:20',
             'start_date' => 'required|date',
             'category_id' => 'required|integer|exists:categories,id',
             'tags' => 'nullable|array',
@@ -103,9 +106,6 @@ class CourseController extends Controller
 
         $course->update($validated);
 
-        // Używamy sync() do aktualizacji relacji many-to-many.
-        // Usunie stare powiązania i doda nowe w jednym kroku.
-        // `?? []` zapewnia, że przekazujemy pustą tablicę, jeśli żadne tagi nie zostały zaznaczone.
         $course->tags()->sync($request->tags ?? []);
 
         return redirect()->route('courses.index')->with('success', 'Kurs zaktualizowany pomyślnie.');

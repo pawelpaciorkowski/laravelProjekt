@@ -42,15 +42,20 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        // Walidacja danych z formularza
+        // ROZBUDOWANA WALIDACJA
         $validated = $request->validate([
-            'name' => 'required|unique:categories|max:255', // Pole wymagane, unikalne w tabeli 'categories', max 255 znaków
+            'name' => [
+                'required',                // Pole jest wymagane
+                'string',                  // Musi być ciągiem znaków
+                'unique:categories,name',  // Nazwa musi być unikalna w tabeli categories
+                'min:3',                   // Minimalna długość to 3 znaki
+                'max:100',                 // Maksymalna długość to 100 znaków
+                'not_regex:/[#@!$%^&*()]/' // Nie może zawierać niektórych znaków specjalnych
+            ],
         ]);
 
-        // Tworzenie nowej kategorii w bazie
         Category::create($validated);
 
-        // Przekierowanie na listę kategorii z komunikatem o sukcesie
         return redirect()->route('categories.index')->with('success', 'Kategoria została pomyślnie dodana.');
     }
 
@@ -68,12 +73,18 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        // Walidacja danych
+        // ROZBUDOWANA WALIDACJA PRZY AKTUALIZACJI
         $validated = $request->validate([
-            'name' => 'required|max:255|unique:categories,name,' . $category->id,
+            'name' => [
+                'required',
+                'string',
+                'min:3',
+                'max:100',
+                'not_regex:/[#@!$%^&*()]/',
+                'unique:categories,name,' . $category->id,
+            ],
         ]);
 
-        // Aktualizacja danych kategorii
         $category->update($validated);
 
         return redirect()->route('categories.index')->with('success', 'Kategoria została pomyślnie zaktualizowana.');

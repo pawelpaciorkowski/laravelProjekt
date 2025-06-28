@@ -39,11 +39,16 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        // Walidacja: Pole 'name' jest wymagane, unikalne i ma max 255 znaków.
-        // Tutaj nadal będziemy mieli mniej niż 5 reguł dla samej walidacji tagów.
-        // Zajmiemy się tym w osobnym kroku później.
+        // ROZBUDOWANA WALIDACJA
         $validated = $request->validate([
-            'name' => 'required|unique:tags|string|max:255',
+            'name' => [
+                'required',              // Pole jest wymagane
+                'string',                // Musi być ciągiem znaków
+                'unique:tags,name',      // Nazwa musi być unikalna
+                'min:2',                 // Minimalna długość to 2 znaki
+                'max:50',                // Maksymalna długość to 50 znaków
+                'alpha_dash'             // Może zawierać tylko znaki alfanumeryczne, myślniki i podkreślenia
+            ],
         ]);
 
         Tag::create($validated);
@@ -74,9 +79,17 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        // Walidacja: Upewnij się, że nazwa jest unikalna, ignorując obecny tag.
+        // ROZBUDOWANA WALIDACJA PRZY AKTUALIZACJI
         $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:tags,name,' . $tag->id,
+            'name' => [
+                'required',
+                'string',
+                'min:2',
+                'max:50',
+                'alpha_dash',
+                // Upewniamy się, że nazwa jest unikalna, ignorując obecny rekord
+                'unique:tags,name,' . $tag->id,
+            ],
         ]);
 
         $tag->update($validated);
