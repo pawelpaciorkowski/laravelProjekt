@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12" x-data="{ showModal: false, modalAction: '', modalTitle: '' }">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             {{-- Komunikaty o sukcesie / błędzie --}}
             @if (session('success'))
@@ -50,11 +50,11 @@
                                     <td class="px-4 py-2 text-sm text-gray-900 dark:text-gray-100">{{ $user->role }}</td>
                                     <td class="px-4 py-2 text-sm text-right">
                                         <a href="{{ route('users.edit', $user) }}" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-900">Edytuj</a>
-                                        <form action="{{ route('users.destroy', $user) }}" method="POST" class="inline ml-4" onsubmit="return confirm('Czy na pewno chcesz zdezaktywować tego użytkownika?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="text-red-600 dark:text-red-400 hover:text-red-900">Dezaktywuj</button>
-                                        </form>
+
+                                        <button x-on:click.prevent="$dispatch('open-modal', { name: 'confirm-user-deletion', action: '{{ route('users.destroy', $user) }}', title: 'Czy na pewno chcesz zdezaktywować użytkownika {{ $user->name }}?' })"
+                                            class="ml-4 text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-200">
+                                            Dezaktywuj
+                                        </button>
                                     </td>
                                 </tr>
                                 @empty
@@ -73,5 +73,6 @@
                 </div>
             </div>
         </div>
+        <x-confirm-deletion-modal name="confirm-user-deletion" />
     </div>
 </x-app-layout>

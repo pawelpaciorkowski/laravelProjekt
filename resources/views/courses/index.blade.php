@@ -5,7 +5,8 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    {{-- KROK 1: DODAJEMY x-data --}}
+    <div class="py-12" x-data="{ showModal: false, modalAction: '', modalTitle: '' }">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             {{-- Komunikat o sukcesie --}}
             @if (session('success'))
@@ -24,11 +25,11 @@
                             Dodaj Kurs
                         </a>
                         @endif
-                        <form action="{{ route('courses.index') }}" method="GET">
-                            <input type="text" name="search" placeholder="Szukaj kursów..." value="{{ request('search') }}" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                            <button type="submit" class="ml-2 inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
+                        <form action="{{ route('courses.index') }}" method="GET" class="ml-auto">
+                            <x-text-input type="text" name="search" placeholder="Szukaj kursów..." value="{{ request('search') }}" />
+                            <x-primary-button class="ml-2">
                                 Szukaj
-                            </button>
+                            </x-primary-button>
                         </form>
                     </div>
 
@@ -36,10 +37,10 @@
                     <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                         <thead class="bg-gray-50 dark:bg-gray-700">
                             <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Tytuł</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Kategoria</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Data rozpoczęcia</th>
-                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Akcje</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tytuł</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategoria</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data rozpoczęcia</th>
+                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Akcje</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
@@ -52,11 +53,12 @@
                                     <a href="{{ route('courses.show', $course) }}" class="text-blue-600 hover:text-blue-900">Pokaż</a>
                                     @if(in_array(auth()->user()->role, ['admin', 'moderator']))
                                     <a href="{{ route('courses.edit', $course) }}" class="text-indigo-600 hover:text-indigo-900 ml-4">Edytuj</a>
-                                    <form action="{{ route('courses.destroy', $course) }}" method="POST" class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:text-red-900 ml-4">Usuń</button>
-                                    </form>
+
+                                    {{-- KROK 2: ZAMIENIAMY STARY FORMULARZ NA NOWY PRZYCISK --}}
+                                    <button x-on:click.prevent="$dispatch('open-modal', { name: 'confirm-course-deletion', action: '{{ route('courses.destroy', $course) }}', title: 'Czy na pewno chcesz usunąć kurs: {{ addslashes($course->title) }}?' })"
+                                        class="ml-4 text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-200">
+                                        Usuń
+                                    </button>
                                     @endif
                                 </td>
                             </tr>
@@ -78,5 +80,8 @@
                 </div>
             </div>
         </div>
+
+        {{-- KROK 3: DODAJEMY KOMPONENT MODALA --}}
+        <x-confirm-deletion-modal name="confirm-course-deletion" />
     </div>
 </x-app-layout>

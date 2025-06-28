@@ -4,55 +4,68 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!-- Styles / Scripts -->
-    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @endif
 </head>
 
-<body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
+<body class="antialiased font-sans bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+    <div class="flex flex-col min-h-screen">
 
-    <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
-        @if (Route::has('login'))
-        <nav class="flex items-center justify-end gap-4">
-            @auth
-            <a href="{{ url('/dashboard') }}"
-                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
-                Dashboard
-            </a>
-            @else
-            <a href="{{ route('login') }}"
-                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal">
-                Log in
-            </a>
+        <header class="p-6 lg:p-8">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <a href="/">
+                    <x-application-logo class="block h-10 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                </a>
 
-            @if (Route::has('register'))
-            <a href="{{ route('register') }}"
-                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
-                Register
-            </a>
-            @endif
-            @endauth
-        </nav>
-        @endif
-    </header>
+                @if (Route::has('login'))
+                <nav class="flex items-center gap-4">
+                    @auth
+                    <a href="{{ url('/dashboard') }}">
+                        <x-primary-button>Panel</x-primary-button>
+                    </a>
+                    @else
+                    <a href="{{ route('login') }}">
+                        <x-secondary-button>Zaloguj się</x-secondary-button>
+                    </a>
 
-    <main class="max-w-[335px] w-full lg:max-w-4xl">
-        <div class="text-[13px] leading-[20px] flex-1 p-6 pb-12 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d] rounded-lg">
-            <h1 class="mb-1 font-medium text-xl">Witaj!</h1>
-            <p class="text-[#706f6c] dark:text-[#A1A09A]">
-                W aplikacji Laravel możesz zarządzać kursami oraz kategoriami, dodawać nowe szkolenia, edytować je i usuwać, a także zapisywać się na dostępne kursy i śledzić swój postęp.
-            </p>
+                    @if (Route::has('register'))
+                    <a href="{{ route('register') }}">
+                        <x-primary-button>Zarejestruj się</x-primary-button>
+                    </a>
+                    @endif
+                    @endauth
+                </nav>
+                @endif
+            </div>
+        </header>
 
-        </div>
-    </main>
+        <main class="flex-grow flex items-center justify-center">
+            <div class="max-w-3xl mx-auto text-center p-6">
+                <h1 class="text-4xl lg:text-6xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    Rozwijaj swoje umiejętności z <span class="text-indigo-600 dark:text-indigo-400">Akademią Wiedzy</span>.
+                </h1>
+                <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">
+                    Dołącz do naszej platformy i uzyskaj dostęp do szerokiej gamy kursów online. Zarządzaj swoją nauką, śledź postępy i zdobywaj nowe kompetencje w jednym miejscu.
+                </p>
+                <div class="mt-10 flex items-center justify-center gap-x-6">
+                    <a href="{{ route('register') }}">
+                        <x-primary-button class="text-base px-6 py-3">Rozpocznij naukę</x-primary-button>
+                    </a>
+                    <a href="{{ route('courses.index') }}" class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
+                        Przeglądaj kursy <span aria-hidden="true">→</span>
+                    </a>
+                </div>
+            </div>
+        </main>
 
+        <footer class="text-center p-6 text-sm text-gray-500 dark:text-gray-400">
+            © {{ date('Y') }} Akademia Wiedzy. Wszelkie prawa zastrzeżone.
+        </footer>
+    </div>
 </body>
 
 </html>
