@@ -22,6 +22,10 @@
                     <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.*')">
                         {{ __('Kursy') }}
                     </x-nav-link>
+                    {{-- DODANY LINK DO TAGÓW --}}
+                    <x-nav-link :href="route('tags.index')" :active="request()->routeIs('tags.*')">
+                        {{ __('Tagi') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -88,6 +92,10 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.*')">
                 {{ __('Kursy') }}
+            </x-responsive-nav-link>
+            {{-- DODANY LINK RESPONSYWNY DO TAGÓW --}}
+            <x-responsive-nav-link :href="route('tags.index')" :active="request()->routeIs('tags.*')">
+                {{ __('Tagi') }}
             </x-responsive-nav-link>
         </div>
 

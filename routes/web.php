@@ -5,7 +5,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\UserController; // Upewnij się, że ten import jest dodany
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\TagController; // Dodaj ten import!
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,7 +24,8 @@ Route::middleware('auth')->group(function () {
     // Trasy zasobów dla poszczególnych modułów
     Route::resource('categories', CategoryController::class);
     Route::resource('courses', CourseController::class);
-    Route::resource('users', UserController::class)->only(['index', 'show']); // Ograniczamy do tylko do odczytu na razie
+    Route::resource('users', UserController::class)->only(['index', 'show']);
+    Route::resource('tags', TagController::class); // Dodaj tę linię!
 
     // Trasy zapisu/wypisu na kurs
     Route::post('courses/{course}/enroll', [CourseController::class, 'enroll'])->name('courses.enroll');
