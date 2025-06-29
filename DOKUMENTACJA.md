@@ -130,20 +130,6 @@ Aplikacja została częściowo spolszczona.
 - Komunikaty walidacji zostały przetłumaczone w pliku `resources/lang/pl/validation.php`.
 - Zastosowano również sekcję `attributes`, aby nazwy pól w komunikatach były bardziej przyjazne dla użytkownika (np. "Pole nazwa jest wymagane" zamiast "Pole name jest wymagane").
 
-## 8. Potencjalne Pytania na Prezentacji
-
-1.  **Pytanie:** *Dlaczego do kontroli dostępu użyłeś Middleware, a nie Gates lub Policies?*
-    **Odpowiedź:** Middleware idealnie nadaje się do ochrony całych grup tras w oparciu o prosty warunek, jakim jest rola użytkownika. Jest to bardzo wydajne i czytelne rozwiązanie dla tego typu logiki. Gates i Policies byłyby lepszym wyborem, gdyby uprawnienia były bardziej złożone, np. zależały od stanu obiektu (czy użytkownik może edytować *ten konkretny* kurs, którego jest autorem).
-
-2.  **Pytanie:** *Jak działa mechanizm "Soft Deletes"?*
-    **Odpowiedź:** Po dodaniu `trait` `SoftDeletes` do modelu i kolumny `deleted_at` do tabeli, wywołanie metody `delete()` na obiekcie nie usuwa rekordu z bazy. Zamiast tego, w kolumnie `deleted_at` ustawiany jest aktualny znacznik czasu. Eloquent automatycznie modyfikuje wszystkie zapytania `SELECT`, dodając warunek `WHERE deleted_at IS NULL`, dzięki czemu "usunięte" rekordy są niewidoczne w aplikacji, ale wciąż istnieją w bazie.
-
-3.  **Pytanie:** *W jaki sposób przekazywane są dane do komponentu modala, skoro jest on w innym pliku?*
-    **Odpowiedź:** Wykorzystałem system zdarzeń w Alpine.js. Przycisk "Usuń" za pomocą `$dispatch` wysyła niestandardowe zdarzenie (`event`) do globalnego obiektu `window`. Komponent modala "nasłuchuje" na to zdarzenie za pomocą dyrektywy `x-on:open-modal.window`. Kiedy zdarzenie zostanie przechwycone, modal odczytuje przekazane w nim dane (tytuł, akcję) i aktualizuje swój wewnętrzny stan, stając się widocznym.
-
-4.  **Pytanie:** *Jakie było największe wyzwanie w tym projekcie?*
-    **Odpowiedź:** (Tutaj możesz opowiedzieć o czymś, co sprawiło Ci trudność, np. o konfiguracji ról, o problemach z zależnościami Composer/NPM, czy o wdrożeniu dynamicznych komponentów z Alpine.js).
-
 ## 9. Podsumowanie i Możliwe Rozszerzenia
 
 Projekt "Akademia Wiedzy" jest w pełni funkcjonalną, nowoczesną aplikacją webową, która spełnia wszystkie założone wymagania. Zaimplementowane funkcje, takie jak system ról, dynamiczny interfejs i zaawansowana walidacja, świadczą o głębokim zrozumieniu frameworka Laravel i nowoczesnych technologii webowych.
@@ -152,4 +138,4 @@ Możliwe kierunki dalszego rozwoju:
 - **Testy Jednostkowe i Funkcjonalne**: Napisanie testów w Pest/PHPUnit, aby zautomatyzować sprawdzanie poprawności działania aplikacji.
 - **System Powiadomień**: Wysyłanie e-maili do użytkowników po zapisaniu się na kurs.
 - **System Ukończenia Kursów**: Dodanie mechanizmu oznaczania lekcji/kursów jako ukończone.
-- **Wdrożenie Laravel Policies**: Refaktoryzacja uprawnień, aby były jeszcze bardziej granularne.
+- **Wdrożenie Laravel Policies**: Refaktoryzacja uprawnień, aby były jeszcze bardziej granularne. 

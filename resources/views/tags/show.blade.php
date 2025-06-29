@@ -24,24 +24,10 @@
                         </a>
                     </div>
 
-                    {{-- Opcjonalnie: Lista kursów, do których przypisany jest ten tag --}}
-                    {{-- Aby to działało, musiałbyś dodać relację `courses()` w modelu `Tag` --}}
-                    {{-- i załadować ją w `TagController@show` (np. `$tag->load('courses');`) --}}
-                    {{--
-                    <div class="mt-8">
-                        <h4 class="text-xl font-semibold">Kursy z tym tagiem</h4>
-                        <ul class="list-disc list-inside mt-2">
-                            @forelse($tag->courses as $course)
-                            <li><a href="{{ route('courses.show', $course) }}" class="text-blue-600 hover:underline">{{ $course->title }}</a></li>
-                    @empty
-                    <li>Brak kursów z tym tagiem.</li>
-                    @endforelse
-                    </ul>
-                </div>
-                --}}
 
+
+                </div>
             </div>
         </div>
-    </div>
     </div>
 </x-app-layout>

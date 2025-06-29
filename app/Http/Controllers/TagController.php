@@ -102,8 +102,6 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         // Obecnie wykonuje twarde usuwanie.
-        // Jeśli będziesz implementować miękkie usuwanie, będzie to wymagało zmian w modelu Tag
-        // i odpowiedniego odświeżenia migracji (co już omówiliśmy).
         $tag->delete();
 
         return redirect()->route('tags.index')->with('success', 'Tag został usunięty.');

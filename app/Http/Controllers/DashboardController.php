@@ -34,7 +34,7 @@ class DashboardController extends Controller
             $discoverCourses = Course::whereNotIn('id', $enrolledCourseIds)
                 ->with('category')
                 ->latest()
-                ->take(3)
+                ->take(5)
                 ->get();
         }
 
