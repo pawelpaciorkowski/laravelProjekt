@@ -75,7 +75,7 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        // Załaduj relacje, aby były dostępne w widoku (szczególnie przydatne, jeśli nie ma eager loading)
+        // Załaduj relacje, aby były dostępne w widoku
         $course->load('category', 'tags', 'participants');
         return view('courses.show', compact('course'));
     }
@@ -118,8 +118,7 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        // Dzięki onDelete('cascade') w migracji, usunięcie kursu
-        // automatycznie usunie powiązania w tabelach pivot.
+
         $course->delete();
 
         return redirect()->route('courses.index')->with('success', 'Kurs usunięty pomyślnie.');
@@ -129,8 +128,7 @@ class CourseController extends Controller
      */
     public function enroll(Course $course)
     {
-        // Używamy metody attach, aby dodać wpis do tabeli pośredniej
-        // unikając duplikatów.
+
         $course->participants()->syncWithoutDetaching(Auth::id());
 
         // Używamy dedykowanej sesji flash, aby wywołać fajerwerki

@@ -7,13 +7,11 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(Request $request) // Dodaj Request $request jako argument
+    public function index(Request $request)
     {
         $search = $request->query('search');
 
@@ -95,9 +93,6 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        // Usunięcie kategorii
-        // Zgodnie z wymaganiami, można by tu zaimplementować "miękkie usuwanie" (dezaktywację)
-        // ale na razie robimy twarde usuwanie.
         $category->delete();
 
         return redirect()->route('categories.index')->with('success', 'Kategoria została usunięta.');

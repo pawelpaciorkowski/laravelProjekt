@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tag;
 use Illuminate\Http\Request;
-use Illuminate\View\View; // Dodaj ten import
+use Illuminate\View\View;
 
 class TagController extends Controller
 {
@@ -87,7 +87,6 @@ class TagController extends Controller
                 'min:2',
                 'max:50',
                 'alpha_dash',
-                // Upewniamy się, że nazwa jest unikalna, ignorując obecny rekord
                 'unique:tags,name,' . $tag->id,
             ],
         ]);
