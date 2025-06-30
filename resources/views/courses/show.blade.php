@@ -58,6 +58,17 @@
                                 <p class="mt-2 text-gray-600 dark:text-gray-300 leading-relaxed">{{ $course->description }}</p>
                             </div>
 
+                            @if ($course->tags->isNotEmpty())
+                                <div class="mt-8">
+                                    <h4 class="text-xl font-semibold text-gray-900 dark:text-white">Tagi</h4>
+                                    <div class="flex flex-wrap gap-2 mt-4">
+                                        @foreach ($course->tags as $tag)
+                                            <span class="bg-gray-200 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-300">{{ $tag->name }}</span>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
+
                             <div class="mt-8">
                                 <h4 class="text-xl font-semibold text-gray-900 dark:text-white">Program kursu</h4>
                                 <ul class="mt-4 space-y-3">
