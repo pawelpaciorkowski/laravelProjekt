@@ -58,13 +58,15 @@
                         {{-- Pole Wybór Tagów (Relacja many-to-many) --}}
                         <div class="mt-4">
                             <label class="block font-medium text-sm text-gray-700 dark:text-gray-300">Tagi</label>
-                            @foreach ($tags as $tag)
-                            <div class="flex items-center mt-1">
-                                <input type="checkbox" name="tags[]" value="{{ $tag->id }}" id="tag_{{ $tag->id }}" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:bg-gray-700"
-                                    {{ (is_array(old('tags')) && in_array($tag->id, old('tags'))) ? ' checked' : '' }}>
-                                <label for="tag_{{ $tag->id }}" class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ $tag->name }}</label>
+                            <div class="mt-2 grid grid-cols-2 md:grid-cols-4 gap-4">
+                                @foreach ($tags as $tag)
+                                <label for="tag_{{ $tag->id }}" class="flex items-center p-3 bg-gray-50 dark:bg-gray-900/50 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 cursor-pointer transition-colors">
+                                    <input type="checkbox" name="tags[]" value="{{ $tag->id }}" id="tag_{{ $tag->id }}" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:bg-gray-700"
+                                        {{ (is_array(old('tags')) && in_array($tag->id, old('tags'))) ? ' checked' : '' }}>
+                                    <span class="ml-3 text-sm font-medium text-gray-700 dark:text-gray-300">{{ $tag->name }}</span>
+                                </label>
+                                @endforeach
                             </div>
-                            @endforeach
                             <x-input-error :messages="$errors->get('tags')" class="mt-2" />
                         </div>
 
