@@ -18,9 +18,15 @@
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
                         <div class="mt-4">
-                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700">
+                            <x-input-label for="description" :value="__('Opis')" />
+                            <textarea name="description" id="description" rows="3" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 dark:bg-gray-700 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600">{{ old('description', $category->description) }}</textarea>
+                            <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                        </div>
+
+                        <div class="mt-6">
+                            <x-primary-button>
                                 Zaktualizuj
-                            </button>
+                            </x-primary-button>
                         </div>
                     </form>
                 </div>

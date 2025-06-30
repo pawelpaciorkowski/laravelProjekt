@@ -50,6 +50,7 @@ class CategoryController extends Controller
                 'max:100',                 // Maksymalna długość to 100 znaków
                 'not_regex:/[#@!$%^&*()]/' // Nie może zawierać niektórych znaków specjalnych
             ],
+            'description' => 'nullable|string|max:255',
         ]);
 
         Category::create($validated);
@@ -81,6 +82,7 @@ class CategoryController extends Controller
                 'not_regex:/[#@!$%^&*()]/',
                 'unique:categories,name,' . $category->id,
             ],
+            'description' => 'nullable|string|max:255',
         ]);
 
         $category->update($validated);
