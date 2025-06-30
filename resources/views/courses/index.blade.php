@@ -49,7 +49,9 @@
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $course->category->name ?? 'Brak' }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $course->start_date }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    @unless(in_array(auth()->user()->role, ['admin', 'moderator']))
                                     <a href="{{ route('courses.show', $course) }}" class="text-blue-600 hover:text-blue-900">Pokaż</a>
+                                    @endunless
                                     @if(in_array(auth()->user()->role, ['admin', 'moderator']))
                                     <a href="{{ route('courses.edit', $course) }}" class="text-indigo-600 hover:text-indigo-900 ml-4">Edytuj</a>
 
