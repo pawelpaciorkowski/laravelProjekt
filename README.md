@@ -1,61 +1,93 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Status Kompilacji"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Całkowita Liczba Pobierań"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Najnowsza Stabilna Wersja"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="Licencja"></a>
 </p>
 
-## About Laravel
+# Projekt Kursy
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Cel Projektu
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Projekt "Kursy" to aplikacja webowa stworzona w celu zarządzania kursami online. Umożliwia tworzenie, edytowanie i przeglądanie kategorii, tagów, kursów oraz zarządzanie użytkownikami z różnymi rolami (administrator, moderator, użytkownik). Głównym celem jest stworzenie platformy do organizacji i prezentacji treści edukacyjnych.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Budowa Projektu
 
-## Learning Laravel
+Aplikacja została zbudowana w oparciu o framework **Laravel**, co zapewnia solidną i skalowalną architekturę. Wykorzystuje:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+-   **PHP** jako język programowania backendu.
+-   **MySQL** (lub SQLite w środowisku deweloperskim) jako bazę danych.
+-   **Blade** jako silnik szablonów do renderowania widoków.
+-   **Tailwind CSS** do stylizacji interfejsu użytkownika, co zapewnia nowoczesny i responsywny wygląd.
+-   **JavaScript** (z wykorzystaniem Alpine.js) dla interaktywności na stronie.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Struktura projektu jest zgodna ze standardami Laravel, z podziałem na kontrolery, modele, widoki, migracje baz danych itp.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Działanie Aplikacji
 
-## Laravel Sponsors
+Aplikacja oferuje następujące kluczowe funkcjonalności:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+-   **Zarządzanie Kategoriami**: Tworzenie, edytowanie, usuwanie i przeglądanie kategorii kursów.
+-   **Zarządzanie Tagami**: Tworzenie, edytowanie, usuwanie i przeglądanie tagów przypisanych do kursów.
+-   **Zarządzanie Kursami**: Tworzenie, edytowanie, usuwanie i przeglądanie kursów, z możliwością przypisywania do nich kategorii i tagów. Kursy mogą zawierać tytuł, opis, cenę, status (opublikowany/nieopublikowany) oraz URL do wideo.
+-   **Zarządzanie Użytkownikami**: System ról (administrator, moderator, użytkownik) z różnymi uprawnieniami dostępu do funkcji aplikacji.
+-   **Autoryzacja i Autentykacja**: Standardowy system logowania i rejestracji użytkowników.
 
-### Premium Partners
+## Jak Uruchomić Projekt
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Aby uruchomić projekt lokalnie, wykonaj następujące kroki:
 
-## Contributing
+1.  **Sklonuj repozytorium:**
+    ```bash
+    git clone <URL_TWOJEGO_REPOZYTORIUM>
+    cd projekt-kursy
+    ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+2.  **Zainstaluj zależności PHP:**
+    ```bash
+    composer install
+    ```
 
-## Code of Conduct
+3.  **Zainstaluj zależności Node.js:**
+    ```bash
+    npm install
+    ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+4.  **Skopiuj plik `.env.example` i skonfiguruj `.env`:**
+    ```bash
+    cp .env.example .env
+    ```
+    Otwórz plik `.env` i skonfiguruj połączenie z bazą danych (np. SQLite lub MySQL). Jeśli używasz SQLite, upewnij się, że plik `database/database.sqlite` istnieje (możesz go utworzyć pustym plikiem).
 
-## Security Vulnerabilities
+5.  **Wygeneruj klucz aplikacji:**
+    ```bash
+    php artisan key:generate
+    ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+6.  **Uruchom migracje bazy danych:**
+    ```bash
+    php artisan migrate
+    ```
+    Jeśli chcesz wypełnić bazę danych przykładowymi danymi, możesz użyć:
+    ```bash
+    php artisan db:seed
+    ```
 
-## License
+7.  **Skompiluj zasoby front-endowe:**
+    ```bash
+    npm run dev
+    # lub npm run build dla wersji produkcyjnej
+    ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+8.  **Uruchom serwer deweloperski Laravel:**
+    ```bash
+    php artisan serve
+    ```
+
+Aplikacja będzie dostępna pod adresem `http://127.0.0.1:8000` (lub innym, wskazanym przez `php artisan serve`).
+
+## Licencja
+
+Projekt "Kursy" jest oprogramowaniem open-source na licencji [MIT](https://opensource.org/licenses/MIT).
