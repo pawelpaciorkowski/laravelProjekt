@@ -30,7 +30,7 @@ class DashboardController extends Controller
             // Pobierz ID kursów, na które użytkownik jest już zapisany
             $enrolledCourseIds = $myCourses->pluck('id');
 
-            // Pobierz 3 najnowsze kursy, na które użytkownik NIE jest zapisany
+            // Pobierz najnowsze kursy, na które użytkownik NIE jest zapisany
             $discoverCourses = Course::whereNotIn('id', $enrolledCourseIds)
                 ->with('category')
                 ->latest()

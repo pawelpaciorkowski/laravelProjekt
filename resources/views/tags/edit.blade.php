@@ -11,7 +11,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <form action="{{ route('tags.update', $tag) }}" method="POST">
                         @csrf
-                        @method('PUT') {{-- Ważne: używamy metody PUT/PATCH do aktualizacji zasobów --}}
+                        @method('PUT')
 
                         <div>
                             <x-input-label for="name" :value="__('Nazwa')" />

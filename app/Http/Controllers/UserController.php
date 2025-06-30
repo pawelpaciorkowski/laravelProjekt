@@ -73,7 +73,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        // Używamy Auth::id() zamiast auth()->id()
+        // Używamy Auth::id()
         if ($user->id === Auth::id() && $user->role === 'admin' && User::where('role', 'admin')->count() === 1) {
             return redirect()->route('users.index')->with('error', 'Nie możesz odebrać sobie uprawnień administratora, jeśli jesteś jedynym administratorem.');
         }

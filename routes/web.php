@@ -6,7 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\TagController; // Dodaj ten import!
+use App\Http\Controllers\TagController;
 
 Route::get('/', function () {
     return view('welcome');

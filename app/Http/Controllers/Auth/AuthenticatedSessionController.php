@@ -28,10 +28,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        // Zamiast do 'dashboard', przekierowujemy na główną stronę ('/').
-        // Funkcja intended() jest ważna, bo jeśli użytkownik próbował wejść
-        // na chronioną stronę przed zalogowaniem, to po zalogowaniu zostanie
-        // tam przeniesiony, co jest pożądanym zachowaniem.
         return redirect()->intended('/dashboard');
     }
     /**

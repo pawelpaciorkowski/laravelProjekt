@@ -17,8 +17,7 @@ class CourseController extends Controller
     {
         $search = $request->query('search');
 
-        // Rozpoczynamy budowę zapytania, od razu ładując relację 'category',
-        // aby uniknąć problemu N+1 zapytań w widoku.
+
         $query = Course::with('category');
 
         if ($search) {

@@ -5,7 +5,6 @@
         </h2>
     </x-slot>
 
-    {{-- KROK 1: DODAJEMY x-data --}}
     <div class="py-12" x-data="{ showModal: false, modalAction: '', modalTitle: '' }">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             {{-- Komunikat o sukcesie --}}
@@ -54,7 +53,6 @@
                                     @if(in_array(auth()->user()->role, ['admin', 'moderator']))
                                     <a href="{{ route('courses.edit', $course) }}" class="text-indigo-600 hover:text-indigo-900 ml-4">Edytuj</a>
 
-                                    {{-- KROK 2: ZAMIENIAMY STARY FORMULARZ NA NOWY PRZYCISK --}}
                                     <button x-on:click.prevent="$dispatch('open-modal', { name: 'confirm-course-deletion', action: '{{ route('courses.destroy', $course) }}', title: 'Czy na pewno chcesz usunąć kurs: {{ addslashes($course->title) }}?' })"
                                         class="ml-4 text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-200">
                                         Usuń
@@ -81,7 +79,6 @@
             </div>
         </div>
 
-        {{-- KROK 3: DODAJEMY KOMPONENT MODALA --}}
         <x-confirm-deletion-modal name="confirm-course-deletion" />
     </div>
 </x-app-layout>

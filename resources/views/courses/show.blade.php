@@ -25,7 +25,7 @@
                             {{-- SEKCJA WIDEO (DYNAMICZNA) --}}
                             @if($course->video_url)
                             @php
-                            // Prosta funkcja do wyciągnięcia ID filmu z linku YouTube
+                            // funkcja do wyciągnięcia ID filmu z linku YouTube
                             preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $course->video_url, $matches);
                             $youtubeId = $matches[1] ?? null;
                             @endphp
@@ -92,10 +92,8 @@
                             <div class="sticky top-8 bg-gray-50 dark:bg-gray-900/50 rounded-lg p-6">
                                 <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Informacje o kursie</h4>
 
-                                {{-- DODAJEMY KLASY KOLORU DO LISTY UL --}}
                                 <ul class="mt-4 space-y-3 text-sm text-gray-600 dark:text-gray-300">
 
-                                    {{-- DODAJEMY TEŻ KLASY DO TEKSTU POGRUBIONEGO --}}
                                     <li class="flex items-center"><svg class="h-5 w-5 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                         </svg> Data rozpoczęcia: <strong class="ml-1 font-semibold text-gray-800 dark:text-gray-100">{{ $course->start_date }}</strong></li>
@@ -133,14 +131,12 @@
         </div>
     </div>
 
-    {{-- Dodaj ten komponent na końcu pliku --}}
     <x-success-modal name="enrollment-success" />
 
-    {{-- Ten blok sprawdzi sesję i uruchomi JS --}}
     @if (session('enrollment_success'))
     <div class="hidden" x-data x-init="
         $nextTick(() => {
-            // Strzelamy konfetti!
+            //  konfetti!
             const duration = 3 * 1000;
             const animationEnd = Date.now() + duration;
             const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
@@ -161,7 +157,7 @@
               confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
             }, 250);
 
-            // Otwieramy modal z wiadomością
+            //  modal z wiadomością
             $dispatch('open-modal', {
                 name: 'enrollment-success',
                 title: 'Zapisano na Kurs!',
